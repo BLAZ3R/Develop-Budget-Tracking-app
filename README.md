@@ -1,5 +1,6 @@
-TrackMySleepQuality - Final Code for 6.3 Recording Quality & Button States
+Budget Tracker App - Final Code for 6.3 Recording Quality & Button States
 ============================================================================
+
 
 Solution code for Android Kotlin Fundamentals Codelab 6.3 Recording Quality & Button States
 
