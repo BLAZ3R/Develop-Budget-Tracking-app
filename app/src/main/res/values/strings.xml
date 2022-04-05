@@ -17,7 +17,7 @@
 <resources>
 
     <!-- App title and fragment titles -->
-    <string name="app_name">Track My Sleep Quality</string>
+    <string name="app_name">Money quality</string>
     <string name="sleep_tracker_fragment">SleepTrackerFragment</string>
     <string name="sleep_quality_fragment">SleepQualityFragment</string>
 
@@ -26,7 +26,6 @@
     <string name="stop">Stop</string>
     <string name="clear">Clear</string>
 
-    <!-- contentDescription strings for quality icons -->
     <string name="quality_0">Sleep Quality 0</string>
     <string name="quality_1">Sleep Quality 1</string>
     <string name="quality_2">Sleep Quality 2</string>
@@ -34,21 +33,14 @@
     <string name="quality_4">Sleep Quality 4</string>
     <string name="quality_5">Sleep Quality 5</string>
 
-    <!-- Output to TextView styled with a little HTML -->
-    <string name="title"><![CDATA[<h3>HERE IS YOUR SLEEP DATA</h3>]]></string>
-    <string name="start_time"><![CDATA[<b>Start:</b>]]></string>
-    <string name="end_time"><![CDATA[<b>End:</b>]]></string>
-    <string name="quality"><![CDATA[<b>Quality:</b>]]></string>
-    <string name="hours_slept"><![CDATA[<b>Hours:Minutes:Seconds</b>]]></string>
-
     <!-- Sleep quality strings -->
-    <string name="how_was_hour_sleep">How was your sleep?</string>
-    <string name="zero_very_bad">Very bad</string>
-    <string name="one_poor">Poor</string>
-    <string name="two_soso">So-so</string>
-    <string name="three_ok">OK</string>
-    <string name="four_pretty_good">Pretty good</string>
-    <string name="five_excellent">Excellent!</string>
+    <string name="how_was_hour_sleep">Choose your category of spending</string>
+    <string name="zero_food">0</string>
+    <string name="one_utilities">1</string>
+    <string name="two_ps">2</string>
+    <string name="three_medical">3</string>
+    <string name="four_education">4</string>
+    <string name="five_gift">5</string>
 
     <!-- Toast to play after Clear button has been pressed -->
     <string name="cleared_message">All your data is gone forever.</string>

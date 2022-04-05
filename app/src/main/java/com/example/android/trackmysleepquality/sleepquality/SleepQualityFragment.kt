@@ -26,7 +26,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.android.trackmysleepquality.R
-import com.example.android.trackmysleepquality.database.SleepDatabase
+import com.example.android.trackmysleepquality.database.SpentMoneyDB
 import com.example.android.trackmysleepquality.databinding.FragmentSleepQualityBinding
 
 /**
@@ -54,10 +54,10 @@ class SleepQualityFragment : Fragment() {
                 inflater, R.layout.fragment_sleep_quality, container, false)
 
         val application = requireNotNull(this.activity).application
-        val arguments = SleepQualityFragmentArgs.fromBundle(arguments!!)
+        val arguments = SleepQualityFragmentArgs.fromBundle(requireArguments())
 
         // Create an instance of the ViewModel Factory.
-        val dataSource = SleepDatabase.getInstance(application).sleepDatabaseDao
+        val dataSource = SpentMoneyDB.getInstance(application).spentMoneyDBDao
         val viewModelFactory = SleepQualityViewModelFactory(arguments.sleepNightKey, dataSource)
 
         // Get a reference to the ViewModel associated with this fragment.
@@ -70,7 +70,7 @@ class SleepQualityFragment : Fragment() {
         binding.sleepQualityViewModel = sleepQualityViewModel
 
         // Add an Observer to the state variable for Navigating when a Quality icon is tapped.
-        sleepQualityViewModel.navigateToSleepTracker.observe(this, Observer {
+        sleepQualityViewModel.navigateToSleepTracker.observe(viewLifecycleOwner, Observer {
             if (it == true) { // Observed state is true.
                 this.findNavController().navigate(
                         SleepQualityFragmentDirections.actionSleepQualityFragmentToSleepTrackerFragment())

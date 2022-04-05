@@ -20,17 +20,17 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.android.trackmysleepquality.database.SleepDatabaseDao
+import com.example.android.trackmysleepquality.database.SpentMoneyDBDao
 import kotlinx.coroutines.launch
 
 /**
  * ViewModel for SleepQualityFragment.
  *
- * @param sleepNightKey The key of the current night we are working on.
+ * @param spendingKey The key of the current night we are working on.
  */
 class SleepQualityViewModel(
-        private val sleepNightKey: Long = 0L,
-        val database: SleepDatabaseDao) : ViewModel() {
+    private val spendingKey: Long = 0L,
+    val database: SpentMoneyDBDao) : ViewModel() {
 
     /**
      * Variable that tells the fragment whether it should navigate to [SleepTrackerFragment].
@@ -60,10 +60,9 @@ class SleepQualityViewModel(
      */
     fun onSetSleepQuality(quality: Int) {
         viewModelScope.launch {
-            val tonight = database.get(sleepNightKey) ?: return@launch
-            tonight.sleepQuality = quality
+            val tonight = database.get(spendingKey) ?: return@launch
+            tonight.quality = quality
             database.update(tonight)
-
             // Setting this state variable to true will alert the observer and trigger navigation.
             _navigateToSleepTracker.value = true
         }

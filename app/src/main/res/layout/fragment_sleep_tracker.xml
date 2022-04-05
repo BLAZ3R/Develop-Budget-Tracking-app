@@ -27,6 +27,7 @@
         <variable
             name="sleepTrackerViewModel"
             type="com.example.android.trackmysleepquality.sleeptracker.SleepTrackerViewModel" />
+
     </data>
 
     <!-- Start of the visible fragment layout using ConstraintLayout -->
@@ -39,65 +40,154 @@
              better and more efficient way to do this, and you will learn about
              RecyclerView in a later lesson. -->
 
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toTopOf="@+id/clear_button"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/stop_button">
-
-            <!-- In the TextView, we can access the nightsString LiveData,
-                 which keeps it displayed and updated in the TextView
-                 whenever it changes. -->
-
-            <TextView
-                android:id="@+id/textview"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin"
-                android:layout_marginTop="@dimen/margin"
-                android:layout_marginEnd="@dimen/margin"
-                android:text="@{sleepTrackerViewModel.nightsString}" />
-        </ScrollView>
-
         <!-- With data binding and LiveData, we can track the buttons' visibility states
              from the ViewModel. The click handler is in the ViewModel as well, and
              you can set it for the Views using this lambda pattern. -->
 
-        <Button
-            android:id="@+id/start_button"
-            style="@style/SleepButtons"
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:maxHeight="100dp"
+            app:layout_constraintBottom_toTopOf="@+id/clear_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/submit_button">
+            <!-- In the TextView, we can access the nightsString LiveData,
+                  which keeps it displayed and updated in the TextView
+                  whenever it changes. -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin"
+                    android:layout_marginTop="@dimen/margin"
+                    android:layout_marginEnd="@dimen/margin"
+                    android:text="@{sleepTrackerViewModel.nightsString}"
+                    android:textColor="@color/black" />
+            </LinearLayout>
+        </ScrollView>
+
+
+        <!-- <TextView
+            android:id="@+id/et_moneytxt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin"
-            android:enabled="@{sleepTrackerViewModel.startButtonVisible}"
-            android:onClick="@{() -> sleepTrackerViewModel.onStartTracking()}"
-            android:text="@string/start"
-            app:layout_constraintBaseline_toBaselineOf="@id/stop_button"
-            app:layout_constraintEnd_toStartOf="@+id/stop_button"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="28dp"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:text="Enter spending money"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/et_money"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:textSize="25sp"
+            android:inputType="number"
             app:layout_constraintHorizontal_chainStyle="spread"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+          />--><!--<TextView
+            android:id="@+id/et_moneytxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="28dp"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:text="Enter spending money"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/et_money"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:textSize="25sp"
+            android:inputType="number"
+            app:layout_constraintBaseline_toBaselineOf="@id/et_moneytxt"
+            app:layout_constraintHorizontal_chainStyle="spread"
+            app:layout_constraintStart_toEndOf="@id/et_moneytxt" />-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/et_nametxt"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginStart="16dp"-->
+<!--            android:textSize="16sp"-->
+<!--            android:layout_marginTop="28dp"-->
+<!--            android:textColor="@color/black"-->
+<!--            android:text="Enter the name of the item you spent on"-->
+<!--            app:layout_constraintHorizontal_chainStyle="spread"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="@id/et_moneytxt" />-->
+
+<!--        <EditText-->
+<!--            android:id="@+id/et_name"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginStart="24dp"-->
+<!--            android:autofillHints="Name"-->
+<!--            app:layout_constraintBaseline_toBaselineOf="@id/et_nametxt"-->
+<!--            app:layout_constraintHorizontal_chainStyle="spread"-->
+<!--            app:layout_constraintStart_toEndOf="@id/et_nametxt" />-->
+
+        <EditText
+            android:id="@+id/et_money"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:hint="Enter money that you spent"
+            android:layout_marginRight="16dp"
+            android:layout_marginLeft="16dp"
+            android:textSize="25sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/et_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="80dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginLeft="16dp"
+            android:hint="Enter the name"
+            android:textSize="25sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <Button
-            android:id="@+id/stop_button"
+            android:id="@+id/submit_button"
             style="@style/SleepButtons"
-            android:layout_width="wrap_content"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin"
-            android:layout_marginEnd="@dimen/margin"
-            android:enabled="@{sleepTrackerViewModel.stopButtonVisible}"
-            android:onClick="@{() -> sleepTrackerViewModel.onStopTracking()}"
-            android:text="@string/stop"
+            android:layout_marginTop="156dp"
+            android:text="Submit"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/start_button"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
             android:id="@+id/clear_button"
             style="@style/SleepButtons"
             android:layout_width="wrap_content"
+            android:width="300dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/margin"
             android:layout_marginEnd="@dimen/margin"

@@ -22,7 +22,7 @@ import android.os.Build
 import android.text.Html
 import android.text.Spanned
 import androidx.core.text.HtmlCompat
-import com.example.android.trackmysleepquality.database.SleepNight
+import com.example.android.trackmysleepquality.database.SpentMoney
 import java.text.SimpleDateFormat
 
 /**
@@ -33,14 +33,14 @@ import java.text.SimpleDateFormat
  * Returns a string representing the numeric quality rating.
  */
 fun convertNumericQualityToString(quality: Int, resources: Resources): String {
-    var qualityString = resources.getString(R.string.three_ok)
+    var qualityString = resources.getString(R.string.three_medical)
     when (quality) {
         -1 -> qualityString = "--"
-        0 -> qualityString = resources.getString(R.string.zero_very_bad)
-        1 -> qualityString = resources.getString(R.string.one_poor)
-        2 -> qualityString = resources.getString(R.string.two_soso)
-        4 -> qualityString = resources.getString(R.string.four_pretty_good)
-        5 -> qualityString = resources.getString(R.string.five_excellent)
+        0 -> qualityString = resources.getString(R.string.zero_food)
+        1 -> qualityString = resources.getString(R.string.one_utilities)
+        2 -> qualityString = resources.getString(R.string.two_ps)
+        4 -> qualityString = resources.getString(R.string.four_education)
+        5 -> qualityString = resources.getString(R.string.five_gift)
     }
     return qualityString
 }
@@ -74,27 +74,41 @@ fun convertLongToDateString(systemTime: Long): String {
  * @return  Spanned - An interface for text that has formatting attached to it.
  *           See: https://developer.android.com/reference/android/text/Spanned
  */
-fun formatNights(nights: List<SleepNight>, resources: Resources): Spanned {
+fun formatNights(nights: List<SpentMoney>, resources: Resources): Spanned {
     val sb = StringBuilder()
+
+    var quality = 0
+    var size = 0
+    var total = 0
+    var avgSum = 0
+    var sum = 0
+
+    nights.forEach {
+        sum = sum + it.money.toInt()
+        quality = quality + it.quality
+        size++
+        total = quality/size
+        avgSum = sum/size
+    }
+
     sb.apply {
-        append(resources.getString(R.string.title))
+        append("<h1>All your spent money:</h1>")
+        append("<h4>Average quality:$total</h4>")
+        append("<h4>Average sum:$avgSum</h4>")
+        append("<h4>Total sum:$sum</h4>")
+        
+//        append("Money&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;")
+//        append("Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;")
+//        append("Quality&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;")
+
         nights.forEach {
+            append("Money Spent: ${it.money}")
+            append("\tOn ${it.name}<br>")
+            append("The quality of this spent money was ${it.quality}")
             append("<br>")
-            append(resources.getString(R.string.start_time))
-            append("\t${convertLongToDateString(it.startTimeMilli)}<br>")
-            if (it.endTimeMilli != it.startTimeMilli) {
-                append(resources.getString(R.string.end_time))
-                append("\t${convertLongToDateString(it.endTimeMilli)}<br>")
-                append(resources.getString(R.string.quality))
-                append("\t${convertNumericQualityToString(it.sleepQuality, resources)}<br>")
-                append(resources.getString(R.string.hours_slept))
-                // Hours
-                append("\t ${it.endTimeMilli.minus(it.startTimeMilli) / 1000 / 60 / 60}:")
-                // Minutes
-                append("${it.endTimeMilli.minus(it.startTimeMilli) / 1000 / 60}:")
-                // Seconds
-                append("${it.endTimeMilli.minus(it.startTimeMilli) / 1000}<br><br>")
-            }
+            /*append("\t${it.money}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;")
+            append("\t${it.name}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;")
+            append("\t${convertNumericQualityToString(it.quality, resources)}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>")*/
         }
     }
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
